@@ -1,0 +1,21 @@
+V2.1
+Corrected 
+	Category: Object getname() -> String getName()
+	StatementLine extra constructor removed
+	StatementLine output types revised
+	getType & getTypeName functions removed from account hierarchy	
+Added packages
+	pt.iul.dcti.poo.financemanager.accounts.formats;
+	pt.iul.dcti.poo.financemanager.accounts.formats.unittests;
+	pt.iul.dcti.poo.financemanager.filters;
+	pt.iul.dcti.poo.financemanager.filters.unittests;
+Added classes
+	BadFormatException
+	BadStatementException
+Added method
+	Date.diffInDays(Date d2)
+V2.2
+Added account names to configuration files
+Changed parameter names in Category and Account subclasses to improve readability
+
+ 
