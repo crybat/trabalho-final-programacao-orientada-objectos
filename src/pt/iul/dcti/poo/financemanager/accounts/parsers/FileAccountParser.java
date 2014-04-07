@@ -28,17 +28,16 @@ public class FileAccountParser implements AccountParser<File> {
         String[] endDate = r.readLine().split(SPLIT_CHARACTER);
         r.close();
 
-        
         Account acc = new AccountFactory().createAccount(header[4].trim(),
                 Long.parseLong(header[1].trim()), header[3].trim());
         acc.setCurrency(header[2].trim());
-        lastActivity = lastActivity.substring(
-                lastActivity.indexOf('-') + 2, lastActivity.length());
-        
+        lastActivity = lastActivity.substring(lastActivity.indexOf('-') + 2,
+                lastActivity.length());
+
         acc.setEndDate(new Date(DF.parse(endDate[1])));
         acc.setStartDate(new Date(DF.parse(startDate[1])));
         acc.setLastActivityDate(new Date(DF.parse(lastActivity)));
-        
+
         return acc;
     }
 
