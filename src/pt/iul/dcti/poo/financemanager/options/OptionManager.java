@@ -6,27 +6,27 @@ import java.util.Map;
 public class OptionManager<T, O extends Option> {
 
     private Map<T, O> options;
-    
+
     public OptionManager(Map<T, O> options)
     {
         this.options = options;
     }
-    
+
     public OptionManager()
     {
         options = new HashMap<>();
     }
-    
+
     public void executeOption(T key)
     {
         if (options.containsKey(key)) {
             options.get(key).executeOption();
         }
     }
-    
+
     public void put(T key, O option)
     {
         options.put(key, option);
     }
-    
+
 }

@@ -34,8 +34,8 @@ public class FileAccountParser implements AccountParser<File> {
         lastActivity = lastActivity.substring(lastActivity.indexOf('-') + 2,
                 lastActivity.length());
 
-        acc.setEndDate(new Date(DF.parse(endDate[1])));
-        acc.setStartDate(new Date(DF.parse(startDate[1])));
+        //acc.setEndDate(new Date(DF.parse(endDate[1])));
+        //acc.setStartDate(new Date(DF.parse(startDate[1])));
         acc.setLastActivityDate(new Date(DF.parse(lastActivity)));
 
         return acc;

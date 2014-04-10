@@ -64,6 +64,20 @@ public class AccountTest {
                 BanksConstants.normalInterestRate(), 0.001);
     }
 
+    /*
+     * @Test public void testAccount2() throws ParseException,
+     * BadFormatException, IOException { Account acc = Account.newAccount(new
+     * File( "account_info/1234567890989.csv")); assertEquals(acc.getId(),
+     * 1234567890989L); assertEquals(acc.getName(), "POUPANCA");
+     * assertEquals(acc.getClass(), SavingsAccount.class);
+     * assertEquals(acc.additionalInfo(), ""); assertEquals(3500.0,
+     * acc.currentBalance(), 0.001); assertEquals(acc.estimatedAverageBalance(),
+     * 3500.0, 0.001); assertEquals(acc.getStartDate(), new Date(31, 10, 2013));
+     * assertEquals(acc.getEndDate(), new Date(3, 1, 2014));
+     * assertEquals(acc.getInterestRate(), BanksConstants.savingsInterestRate(),
+     * 0.001); }
+     */
+
     @Test
     public void testAccount2() throws ParseException, BadFormatException,
             IOException
@@ -74,8 +88,8 @@ public class AccountTest {
         assertEquals(acc.getName(), "POUPANCA");
         assertEquals(acc.getClass(), SavingsAccount.class);
         assertEquals(acc.additionalInfo(), "");
-        assertEquals(3500.0, acc.currentBalance(), 0.001);
-        assertEquals(acc.estimatedAverageBalance(), 3500.0, 0.001);
+        assertEquals(acc.currentBalance(), 3900.0, 0.001);
+        assertEquals(acc.estimatedAverageBalance(), 3900.0, 0.001);
         assertEquals(acc.getStartDate(), new Date(31, 10, 2013));
         assertEquals(acc.getEndDate(), new Date(3, 1, 2014));
         assertEquals(acc.getInterestRate(),

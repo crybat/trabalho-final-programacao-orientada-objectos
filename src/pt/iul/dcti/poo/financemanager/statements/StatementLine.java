@@ -136,12 +136,35 @@ public class StatementLine {
     {
         return category;
     }
+
+    @Override
+    public int hashCode()
+    {
+        final int prime = 31;
+        int result = 1;
+        long temp;
+        temp = Double.doubleToLongBits(accountingBalance);
+        result = prime * result + (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(availableBalance);
+        result = prime * result + (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(credit);
+        result = prime * result + (int) (temp ^ (temp >>> 32));
+        result = prime * result + ((date == null) ? 0 : date.hashCode());
+        result = prime * result
+                + ((description == null) ? 0 : description.hashCode());
+        temp = Double.doubleToLongBits(draft);
+        result = prime * result + (int) (temp ^ (temp >>> 32));
+        result = prime * result
+                + ((valueDate == null) ? 0 : valueDate.hashCode());
+        return result;
+    }
+
     
     @Override
     public boolean equals(Object obj)
     {
         if (this == obj) return true;
-        if (obj == null || !(obj instanceof StatementLine)) return false;
+        if (obj == null || getClass() != obj.getClass()) return false;
         
         StatementLine o = (StatementLine) obj;
         

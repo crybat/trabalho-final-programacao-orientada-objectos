@@ -23,8 +23,7 @@ public abstract class Account {
         ScannerStatementLineParser.populateAccount(acc, file);
         String baseName = file.getName();
         String statementsFileName = Configuration.DIR_STATEMENTS
-                + baseName.substring(0, baseName.indexOf(".csv")) + "_1"
-                + ".csv";
+                + baseName.substring(0, baseName.indexOf(".csv")) + "_1.csv";
         File additionalStatements = new File(statementsFileName);
         if (additionalStatements.canRead()) {
             ScannerStatementLineParser.populateAccount(acc,
@@ -54,13 +53,12 @@ public abstract class Account {
         if (statementLine == null || statementExists(statementLine))
             return;
 
-        currentBalance = statementLine.getAvailableBalance();
-        if (startDate == null
-                || startDate.compareTo(statementLine.getDate()) > 0) {
+        if (startDate == null || startDate.compareTo(statementLine.getDate()) > 0) {
             startDate = statementLine.getDate();
         }
         if (endDate == null || endDate.compareTo(statementLine.getDate()) < 0) {
             endDate = statementLine.getDate();
+            currentBalance = statementLine.getAvailableBalance();
         }
 
         statements.add(statementLine);
@@ -137,7 +135,7 @@ public abstract class Account {
         return currentBalance;
     }
 
-    List<StatementLine> statements()
+    public List<StatementLine> statements()
     {
         return statements;
     }

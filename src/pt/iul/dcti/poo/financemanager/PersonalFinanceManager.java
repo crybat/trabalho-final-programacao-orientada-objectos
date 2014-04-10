@@ -11,7 +11,7 @@ import pt.iul.dcti.poo.financemanager.accounts.Account;
 
 public class PersonalFinanceManager {
     
-    private Map<Long, Account> accounts = new HashMap<>();
+    private Map<String, Account> accounts = new HashMap<>();
     
     public PersonalFinanceManager() throws IOException, ParseException
     {
@@ -22,15 +22,13 @@ public class PersonalFinanceManager {
     {
         File accountsDir = new File(Configuration.DIR_ACCOUNTS);
         
-        if (!accountsDir.canRead()) return;
-        
         for (File file : accountsDir.listFiles(accountFileNameFilter)) {
             Account acc = Account.newAccount(file);
-            accounts.put(acc.getId(), acc);
+            accounts.put(String.valueOf(acc.getId()), acc);
         }
     }
     
-    public Map<Long, Account> getAccounts()
+    public Map<String, Account> getAccounts()
     {
         return accounts;
     }
