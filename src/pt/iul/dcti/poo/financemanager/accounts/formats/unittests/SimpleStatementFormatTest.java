@@ -20,35 +20,32 @@ import pt.iul.dcti.poo.financemanager.statements.StatementLine;
  */
 public class SimpleStatementFormatTest {
 
-    private StatementLine       s1;
-    private StatementLine       s2;
+    private StatementLine s1;
+    private StatementLine s2;
     private StatementLineFormat f;
 
     @Before
-    public void setUp() throws Exception
-    {
-        s1 = new StatementLine(new Date(1, 1, 2014), new Date(1, 1, 2014),
-                "description", 0.0, 22, 1520, 1542, null);
-        s2 = new StatementLine(new Date(2, 1, 2014), new Date(3, 1, 2014),
-                "description ...", -10.0, 220, 1500, 1730, new Category(
-                        "CATEGORY"));
-        f = new SimpleStatementFormat();
+    public void setUp() throws Exception {
+	s1 = new StatementLine(new Date(1, 1, 2014), new Date(1, 1, 2014),
+		"description", 0.0, 22, 1520, 1542, null);
+	s2 = new StatementLine(new Date(2, 1, 2014), new Date(3, 1, 2014),
+		"description ...", -10.0, 220, 1500, 1730, new Category(
+			"CATEGORY"));
+	f = new SimpleStatementFormat();
     }
 
     @Test
-    public void testFormat()
-    {
-        assertEquals(f.format(s1),
-                "01-01-2014 \tdescription \t0.0 	22.0 \t1542.0");
-        assertEquals(f.format(s2),
-                "02-01-2014 \tdescription ... \t-10.0 \t220.0 \t1730.0");
+    public void testFormat() {
+	assertEquals(f.format(s1),
+		"01-01-2014 \tdescription \t0.0 	22.0 \t1542.0");
+	assertEquals(f.format(s2),
+		"02-01-2014 \tdescription ... \t-10.0 \t220.0 \t1730.0");
     }
 
     @Test
-    public void testFields()
-    {
-        assertEquals(f.fields(),
-                "Date \t\tDescription \tDraft \tCredit \tAvailable balance ");
+    public void testFields() {
+	assertEquals(f.fields(),
+		"Date \t\tDescription \tDraft \tCredit \tAvailable balance ");
     }
 
 }

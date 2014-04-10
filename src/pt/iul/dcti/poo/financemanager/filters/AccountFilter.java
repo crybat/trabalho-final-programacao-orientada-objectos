@@ -4,9 +4,8 @@ import pt.iul.dcti.poo.financemanager.accounts.Account;
 
 public class AccountFilter extends Filter<Account, Selector<Account>> {
 
-    public AccountFilter(Selector<Account> selector)
-    {
-        setSelector(selector);
+    public AccountFilter(Selector<Account> selector) {
+	setSelector(selector);
     }
 
 }

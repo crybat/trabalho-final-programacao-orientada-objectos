@@ -23,18 +23,16 @@ public class AccountIdSelectorTest {
     private static Account a2;
 
     @BeforeClass
-    public static void setUpBeforeClass() throws Exception
-    {
-        a1 = new DraftAccount(12345, "DRAFT_ACC");
-        a2 = new DraftAccount(67890, "DRAFT_ACC");
+    public static void setUpBeforeClass() throws Exception {
+	a1 = new DraftAccount(12345, "DRAFT_ACC");
+	a2 = new DraftAccount(67890, "DRAFT_ACC");
     }
 
     @Test
-    public void testAccountIdSelector()
-    {
-        AccountIdSelector idSelector = new AccountIdSelector(12345);
-        assertTrue(idSelector.isSelected(a1));
-        assertFalse(idSelector.isSelected(a2));
+    public void testAccountIdSelector() {
+	AccountIdSelector idSelector = new AccountIdSelector(12345);
+	assertTrue(idSelector.isSelected(a1));
+	assertFalse(idSelector.isSelected(a2));
     }
 
 }

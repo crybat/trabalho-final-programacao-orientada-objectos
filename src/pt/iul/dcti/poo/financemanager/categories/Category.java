@@ -8,31 +8,26 @@ public class Category {
 
     private String name;
     private Set<String> descriptions = new HashSet<>();
-    
-    public Category(String name)
-    {
-        this.name = name;
+
+    public Category(String name) {
+	this.name = name;
     }
 
-    public static List<Category> readCategories(String fileName)
-    {
-        // TODO Auto-generated method stub
-        return null;
+    public static List<Category> readCategories(String fileName) {
+	// TODO Auto-generated method stub
+	return null;
     }
 
-    public boolean hasDescription(String description)
-    {
-        return descriptions.contains(description);
+    public boolean hasDescription(String description) {
+	return descriptions.contains(description);
     }
 
-    public void addDescription(String description)
-    {
-        descriptions.add(description);
+    public void addDescription(String description) {
+	descriptions.add(description);
     }
 
-    public String getName()
-    {
-        return name;
+    public String getName() {
+	return name;
     }
 
 }

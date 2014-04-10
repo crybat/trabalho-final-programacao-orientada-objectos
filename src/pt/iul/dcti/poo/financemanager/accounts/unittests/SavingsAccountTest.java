@@ -17,28 +17,24 @@ public class SavingsAccountTest {
     private Account a5;
 
     @Before
-    public void setUp() throws Exception
-    {
-        a5 = Account.newAccount(new File("account_info/1234567890989.csv"));
+    public void setUp() throws Exception {
+	a5 = Account.newAccount(new File("account_info/1234567890989.csv"));
     }
 
     @After
-    public void tearDown() throws Exception
-    {
+    public void tearDown() throws Exception {
     }
 
     @Test
-    public void testSavingsAccount()
-    {
-        Account a = new SavingsAccount(1, "SAV");
-        assertEquals(a.getInterestRate(), BanksConstants.savingsInterestRate(),
-                0.001);
+    public void testSavingsAccount() {
+	Account a = new SavingsAccount(1, "SAV");
+	assertEquals(a.getInterestRate(), BanksConstants.savingsInterestRate(),
+		0.001);
     }
 
     @Test
-    public void testGetType()
-    {
-        assertEquals(a5.getClass(), SavingsAccount.class);
+    public void testGetType() {
+	assertEquals(a5.getClass(), SavingsAccount.class);
     }
 
 }
