@@ -6,14 +6,14 @@ public class SimpleStatementFormat implements StatementLineFormat {
 
     @Override
     public String fields() {
-	return "Date \tDescription \tDraft \tCredit \tAvailable balance ";
+        return "Date \tDescription \tDraft \tCredit \tAvailable balance ";
     }
 
     @Override
     public String format(StatementLine sttLine) {
-	return sttLine.getDate() + " \t" + sttLine.getDescription() + " \t"
-		+ sttLine.getDraft() + " \t" + sttLine.getCredit() + " \t"
-		+ sttLine.getAvailableBalance();
+        return sttLine.getDate() + " \t" + sttLine.getDescription() + " \t"
+                + sttLine.getDraft() + " \t" + sttLine.getCredit() + " \t"
+                + sttLine.getAvailableBalance();
     }
 
 }

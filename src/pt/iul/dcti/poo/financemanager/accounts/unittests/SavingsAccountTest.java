@@ -18,7 +18,7 @@ public class SavingsAccountTest {
 
     @Before
     public void setUp() throws Exception {
-	a5 = Account.newAccount(new File("account_info/1234567890989.csv"));
+        a5 = Account.newAccount(new File("account_info/1234567890989.csv"));
     }
 
     @After
@@ -27,14 +27,14 @@ public class SavingsAccountTest {
 
     @Test
     public void testSavingsAccount() {
-	Account a = new SavingsAccount(1, "SAV");
-	assertEquals(a.getInterestRate(), BanksConstants.savingsInterestRate(),
-		0.001);
+        Account a = new SavingsAccount(1, "SAV");
+        assertEquals(a.getInterestRate(), BanksConstants.savingsInterestRate(),
+                0.001);
     }
 
     @Test
     public void testGetType() {
-	assertEquals(a5.getClass(), SavingsAccount.class);
+        assertEquals(a5.getClass(), SavingsAccount.class);
     }
 
 }

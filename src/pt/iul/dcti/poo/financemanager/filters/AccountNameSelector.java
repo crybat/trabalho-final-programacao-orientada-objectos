@@ -7,12 +7,12 @@ public class AccountNameSelector implements Selector<Account> {
     private String name;
 
     public AccountNameSelector(String name) {
-	this.name = name;
+        this.name = name;
     }
 
     @Override
     public boolean isSelected(Account item) {
-	return name.equals(item.getName());
+        return name.equals(item.getName());
     }
 
 }

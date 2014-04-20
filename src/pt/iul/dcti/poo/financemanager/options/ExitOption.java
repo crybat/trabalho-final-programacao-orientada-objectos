@@ -6,7 +6,7 @@ public class ExitOption implements Option {
 
     @Override
     public void executeOption() {
-	System.exit(STATUS_OK);
+        System.exit(STATUS_OK);
     }
 
 }

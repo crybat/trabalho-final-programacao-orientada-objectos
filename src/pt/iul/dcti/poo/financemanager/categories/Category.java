@@ -10,24 +10,24 @@ public class Category {
     private Set<String> descriptions = new HashSet<>();
 
     public Category(String name) {
-	this.name = name;
+        this.name = name;
     }
 
     public static List<Category> readCategories(String fileName) {
-	// TODO Auto-generated method stub
-	return null;
+        // TODO Auto-generated method stub
+        return null;
     }
 
     public boolean hasDescription(String description) {
-	return descriptions.contains(description);
+        return descriptions.contains(description);
     }
 
     public void addDescription(String description) {
-	descriptions.add(description);
+        descriptions.add(description);
     }
 
     public String getName() {
-	return name;
+        return name;
     }
 
 }

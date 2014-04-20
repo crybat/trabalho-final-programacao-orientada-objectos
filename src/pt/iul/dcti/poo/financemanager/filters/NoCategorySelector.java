@@ -6,7 +6,7 @@ public class NoCategorySelector implements Selector<StatementLine> {
 
     @Override
     public boolean isSelected(StatementLine item) {
-	return item.getCategory() == null;
+        return item.getCategory() == null;
     }
 
 }

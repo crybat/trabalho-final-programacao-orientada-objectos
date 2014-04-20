@@ -11,26 +11,26 @@ public class GlobalPositionOption implements Option {
     private AccountFormat formatter;
 
     public GlobalPositionOption(PersonalFinanceManager pfm,
-	    AccountFormat formatter) {
-	this.pfm = pfm;
-	this.formatter = formatter;
+            AccountFormat formatter) {
+        this.pfm = pfm;
+        this.formatter = formatter;
     }
 
     @Override
     public void executeOption() {
-	double totalBalance = 0.0;
-	StringBuilder b = new StringBuilder();
+        double totalBalance = 0.0;
+        StringBuilder b = new StringBuilder();
 
-	b.append(PersonalFinanceManagerUserInterface.OPT_GLOBAL_POSITION)
-		.append("\n").append(formatter.fields()).append("\n");
+        b.append(PersonalFinanceManagerUserInterface.OPT_GLOBAL_POSITION)
+                .append("\n").append(formatter.fields()).append("\n");
 
-	for (Account acc : pfm.getAccounts().values()) {
-	    b.append(formatter.format(acc)).append("\n");
-	    totalBalance += acc.getCurrentBalance();
-	}
+        for (Account acc : pfm.getAccounts().values()) {
+            b.append(formatter.format(acc)).append("\n");
+            totalBalance += acc.getCurrentBalance();
+        }
 
-	b.append("Total balance:\t\t").append(totalBalance);
-	System.out.println(b);
+        b.append("Total balance:\t\t").append(totalBalance);
+        System.out.println(b);
     }
 
 }

@@ -18,23 +18,23 @@ public class PersonalFinanceManagerUserInterface {
     public static final String OPT_ANUAL_INTEREST = "Previsão juros anuais";
 
     public static final String[] OPTIONS_ANALYSIS = { OPT_MONTHLY_SUMMARY,
-	    OPT_PREDICTION_PER_CATEGORY, OPT_ANUAL_INTEREST };
+            OPT_PREDICTION_PER_CATEGORY, OPT_ANUAL_INTEREST };
 
     private final String[] OPTIONS = { OPT_GLOBAL_POSITION,
-	    OPT_ACCOUNT_STATEMENT, OPT_LIST_CATEGORIES, OPT_ANALISE, OPT_EXIT };
+            OPT_ACCOUNT_STATEMENT, OPT_LIST_CATEGORIES, OPT_ANALISE, OPT_EXIT };
 
     private OptionManager<String, Option> opts;
 
     public PersonalFinanceManagerUserInterface(
-	    OptionManager<String, Option> opts) {
-	this.opts = opts;
+            OptionManager<String, Option> opts) {
+        this.opts = opts;
     }
 
     public void execute() {
-	while (true) {
-	    opts.executeOption(Menu.requestSelection(Configuration.getAppTitle(),
-		    OPTIONS));
-	}
+        while (true) {
+            opts.executeOption(Menu.requestSelection(
+                    Configuration.getAppTitle(), OPTIONS));
+        }
     }
 
 }

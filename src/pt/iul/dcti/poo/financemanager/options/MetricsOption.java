@@ -8,15 +8,15 @@ public class MetricsOption implements Option {
     private OptionManager<String, Option> options;
 
     public MetricsOption(OptionManager<String, Option> options) {
-	this.options = options;
+        this.options = options;
     }
 
     @Override
     public void executeOption() {
-	String choice = Menu.requestSelection(
-		PersonalFinanceManagerUserInterface.OPT_ANALISE,
-		PersonalFinanceManagerUserInterface.OPTIONS_ANALYSIS);
+        String choice = Menu.requestSelection(
+                PersonalFinanceManagerUserInterface.OPT_ANALISE,
+                PersonalFinanceManagerUserInterface.OPTIONS_ANALYSIS);
 
-	options.executeOption(choice);
+        options.executeOption(choice);
     }
 }

@@ -6,18 +6,18 @@ public class BanksConstants {
     private static double savingsInterestRate = 0.02;
 
     public static double savingsInterestRate() {
-	return savingsInterestRate;
+        return savingsInterestRate;
     }
 
     public static double normalInterestRate() {
-	return normalInterestRate;
+        return normalInterestRate;
     }
 
     public static void setNormalInterestRate(double r) {
-	normalInterestRate = r;
+        normalInterestRate = r;
     }
 
     public static void setSavingsInterestRate(double r) {
-	savingsInterestRate = r;
+        savingsInterestRate = r;
     }
 }

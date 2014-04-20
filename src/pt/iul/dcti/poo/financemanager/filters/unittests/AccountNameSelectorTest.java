@@ -17,15 +17,15 @@ public class AccountNameSelectorTest {
 
     @Before
     public void setUp() throws Exception {
-	a1 = new DraftAccount(12345, "DRAFT_ACC");
-	a2 = new DraftAccount(67890, "SOMETHING_ELSE");
+        a1 = new DraftAccount(12345, "DRAFT_ACC");
+        a2 = new DraftAccount(67890, "SOMETHING_ELSE");
     }
 
     @Test
     public void testAccountNameSelector() {
-	AccountNameSelector nameSelector = new AccountNameSelector("DRAFT_ACC");
-	assertTrue(nameSelector.isSelected(a1));
-	assertFalse(nameSelector.isSelected(a2));
+        AccountNameSelector nameSelector = new AccountNameSelector("DRAFT_ACC");
+        assertTrue(nameSelector.isSelected(a1));
+        assertFalse(nameSelector.isSelected(a2));
     }
 
 }

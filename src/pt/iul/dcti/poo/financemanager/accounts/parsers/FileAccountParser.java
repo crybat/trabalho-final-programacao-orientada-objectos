@@ -15,16 +15,16 @@ public class FileAccountParser implements AccountParser<File> {
 
     @Override
     public Account parseAccount(File data) throws IOException, ParseException {
-	BufferedReader r = new BufferedReader(new FileReader(data));
-	r.readLine();
-	String[] header = r.readLine().split(SPLIT_STRING);
-	r.close();
+        BufferedReader r = new BufferedReader(new FileReader(data));
+        r.readLine();
+        String[] header = r.readLine().split(SPLIT_STRING);
+        r.close();
 
-	Account acc = new AccountFactory().createAccount(header[4].trim(),
-		Long.parseLong(header[1].trim()), header[3].trim());
-	acc.setCurrency(header[2].trim());
+        Account acc = new AccountFactory().createAccount(header[4].trim(),
+                Long.parseLong(header[1].trim()), header[3].trim());
+        acc.setCurrency(header[2].trim());
 
-	return acc;
+        return acc;
     }
 
 }

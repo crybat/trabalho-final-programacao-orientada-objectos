@@ -15,26 +15,26 @@ public class AccountStatementOption implements Option {
     private Map<String, Account> accounts;
 
     public AccountStatementOption(PersonalFinanceManager pfm,
-	    StatementLineFormat formatter) {
-	this.formatter = formatter;
-	accounts = pfm.getAccounts();
+            StatementLineFormat formatter) {
+        this.formatter = formatter;
+        accounts = pfm.getAccounts();
     }
 
     @Override
     public void executeOption() {
-	String accountID = chooseAccount();
-	StringBuilder b = new StringBuilder();
-	b.append(PersonalFinanceManagerUserInterface.OPT_ACCOUNT_STATEMENT)
-		.append("\n").append(formatter.fields()).append("\n");
-	for (StatementLine statement : accounts.get(accountID).getStatements()) {
-	    b.append(formatter.format(statement)).append("\n");
-	}
+        String accountID = chooseAccount();
+        StringBuilder b = new StringBuilder();
+        b.append(PersonalFinanceManagerUserInterface.OPT_ACCOUNT_STATEMENT)
+                .append("\n").append(formatter.fields()).append("\n");
+        for (StatementLine statement : accounts.get(accountID).getStatements()) {
+            b.append(formatter.format(statement)).append("\n");
+        }
 
-	System.out.println(b);
+        System.out.println(b);
     }
 
     private String chooseAccount() {
-	String[] accountOptions = accounts.keySet().toArray(new String[0]);
-	return Menu.requestSelection("Choose an Account", accountOptions);
+        String[] accountOptions = accounts.keySet().toArray(new String[0]);
+        return Menu.requestSelection("Choose an Account", accountOptions);
     }
 }

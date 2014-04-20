@@ -17,31 +17,31 @@ public class Filter<T, F extends Selector<T>> {
     }
 
     public Filter(F selector) {
-	this.selector = selector;
+        this.selector = selector;
     }
 
     protected void setSelector(F selector) {
-	this.selector = selector;
+        this.selector = selector;
     }
 
     @SuppressWarnings("unchecked")
     public List<T> apply(List<T> list) {
-	List<T> selected = null;
-	try {
-	    selected = list.getClass().newInstance();
-	    for (T item : list) {
-		if (selector.isSelected(item))
-		    selected.add(item);
-	    }
-	} catch (InstantiationException e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
-	} catch (IllegalAccessException e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
-	}
+        List<T> selected = null;
+        try {
+            selected = list.getClass().newInstance();
+            for (T item : list) {
+                if (selector.isSelected(item))
+                    selected.add(item);
+            }
+        } catch (InstantiationException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 
-	return selected;
+        return selected;
     }
 
     // public List<T> apply(List<T> list) {
@@ -58,6 +58,6 @@ public class Filter<T, F extends Selector<T>> {
     // protected abstract List<T> newList();
 
     protected Selector<T> getSelector() {
-	return selector;
+        return selector;
     }
 }

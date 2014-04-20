@@ -6,12 +6,12 @@ public class BalanceAccountFormat implements AccountFormat {
 
     @Override
     public String format(Account acc) {
-	return acc.getId() + "\t\t" + acc.getCurrentBalance();
+        return acc.getId() + "\t\t" + acc.getCurrentBalance();
     }
 
     @Override
     public String fields() {
-	return "Account Number\t\tBalance";
+        return "Account Number\t\tBalance";
     }
 
 }

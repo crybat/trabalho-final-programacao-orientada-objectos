@@ -15,18 +15,18 @@ import pt.iul.dcti.poo.financemanager.statements.parsers.ScannerStatementLinePar
 public abstract class Account {
 
     public static Account newAccount(File file) throws IOException,
-	    ParseException {
-	Account acc = new FileAccountParser().parseAccount(file);
-	ScannerStatementLineParser.populateAccount(acc, file);
-	String baseName = file.getName();
-	String statementsFileName = Configuration.getDirStatements()
-		+ baseName.substring(0, baseName.indexOf(".csv")) + "_1.csv";
-	File additionalStatements = new File(statementsFileName);
-	if (additionalStatements.canRead()) {
-	    ScannerStatementLineParser.populateAccount(acc,
-		    additionalStatements);
-	}
-	return acc;
+            ParseException {
+        Account acc = new FileAccountParser().parseAccount(file);
+        ScannerStatementLineParser.populateAccount(acc, file);
+        String baseName = file.getName();
+        String statementsFileName = Configuration.getDirStatements()
+                + baseName.substring(0, baseName.indexOf(".csv")) + "_1.csv";
+        File additionalStatements = new File(statementsFileName);
+        if (additionalStatements.canRead()) {
+            ScannerStatementLineParser.populateAccount(acc,
+                    additionalStatements);
+        }
+        return acc;
     }
 
     private long id;
@@ -36,67 +36,67 @@ public abstract class Account {
     private String currency;
 
     public Account(long id, String name) {
-	this.id = id;
-	setName(name);
+        this.id = id;
+        setName(name);
     }
 
     public void addStatementLine(StatementLine statementLine) {
-	if (statementLine == null)
-	    return;
+        if (statementLine == null)
+            return;
 
-	statements.add(statementLine);
+        statements.add(statementLine);
     }
 
     public void setName(String name) {
-	this.name = name;
+        this.name = name;
     }
 
     public void setCurrency(String currency) {
-	this.currency = currency;
+        this.currency = currency;
     }
 
     public long getId() {
-	return id;
+        return id;
     }
 
     public String getName() {
-	return name;
+        return name;
     }
 
     public String getCurrency() {
-	return currency;
+        return currency;
     }
 
     public String additionalInfo() {
-	return additionalInfo;
+        return additionalInfo;
     }
 
     public double currentBalance() {
-	return hasStatements() ? statements.last().getAvailableBalance() : 0.0;
+        return hasStatements() ? statements.last().getAvailableBalance() : 0.0;
     }
 
     public Date getStartDate() {
-	return hasStatements() ? statements.first().getDate() : null;
+        return hasStatements() ? statements.first().getDate() : null;
     }
 
     public Date getEndDate() {
-	return hasStatements() ? statements.last().getDate() : null;
+        return hasStatements() ? statements.last().getDate() : null;
     }
 
     public double getCurrentBalance() {
-	return hasStatements() ? statements.last().getAvailableBalance() : 0.0;
+        return hasStatements() ? statements.last().getAvailableBalance() : 0.0;
     }
 
     public Date getLastActivityDate() {
-	return getEndDate();
+        return getEndDate();
     }
 
     public SortedSet<StatementLine> getStatements() {
-	return statements;
+        return statements;
     }
 
     public boolean hasStatements() {
-	return !statements.isEmpty();
+        return !statements.isEmpty();
     }
 
     public abstract double getInterestRate();

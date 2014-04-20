@@ -10,19 +10,19 @@ public class Configuration {
     private static final String DATE_FORMAT = "dd-MM-yyyy";
 
     public static String getAppTitle() {
-	return APP_TITLE;
+        return APP_TITLE;
     }
 
     public static String getDirAccounts() {
-	return DIR_ACCOUNTS;
+        return DIR_ACCOUNTS;
     }
 
     public static String getDirStatements() {
-	return DIR_STATEMENTS;
+        return DIR_STATEMENTS;
     }
 
     public static String getDateFormat() {
-	return DATE_FORMAT;
+        return DATE_FORMAT;
     }
 
 }
