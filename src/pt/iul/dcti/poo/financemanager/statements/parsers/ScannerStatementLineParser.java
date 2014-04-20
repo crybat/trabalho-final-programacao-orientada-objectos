@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+import pt.iul.dcti.poo.financemanager.Configuration;
 import pt.iul.dcti.poo.financemanager.accounts.Account;
 import pt.iul.dcti.poo.financemanager.date.Date;
 import pt.iul.dcti.poo.financemanager.exceptions.BadDate;
@@ -19,8 +20,15 @@ import pt.iul.dcti.poo.financemanager.statements.StatementLine;
 public class ScannerStatementLineParser implements StatementLineParser<Scanner> {
 
     private static final String DELIMITER = ";";
-    private static final DateFormat DF = new SimpleDateFormat(
-	    StatementLine.DATE_FORMAT);
+    private static final String PATTERN = "(\\d{2}-\\d{2}-\\d{4})\\s*;" // Date
+    	+ "(\\d{2}-\\d{2}-\\d{4})\\s*;" // Value Date
+    	+ "(\\w)*\\s*;" // Description
+    	+ "(-\\d+)*\\s*;" // Draft
+    	+ "(\\d+)*\\s*;" // Credit
+    	+ "(-\\d+)*\\s*;" // Accounting balance
+    	+ "(-\\d+)*\\s*;"; // Available Balance
+    private static final DateFormat DATE_PARSER = new SimpleDateFormat(
+	    Configuration.getDateFormat());
 
     public static void populateAccount(Account acc, File file)
 	    throws IOException {
@@ -57,11 +65,11 @@ public class ScannerStatementLineParser implements StatementLineParser<Scanner> 
 	try {
 	    // Date
 	    token = next(line);
-	    date = new Date(DF.parse(token));
+	    date = new Date(DATE_PARSER.parse(token));
 
 	    // Value Date
 	    token = next(line);
-	    dateValue = new Date(DF.parse(token));
+	    dateValue = new Date(DATE_PARSER.parse(token));
 	} catch (ParseException e) {
 	    throw new BadDate();
 	}

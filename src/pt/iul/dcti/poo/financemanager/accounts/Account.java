@@ -14,14 +14,12 @@ import pt.iul.dcti.poo.financemanager.statements.parsers.ScannerStatementLinePar
 
 public abstract class Account {
 
-    public static final String DATE_FORMAT = "dd-MM-yyyy";
-
     public static Account newAccount(File file) throws IOException,
 	    ParseException {
 	Account acc = new FileAccountParser().parseAccount(file);
 	ScannerStatementLineParser.populateAccount(acc, file);
 	String baseName = file.getName();
-	String statementsFileName = Configuration.DIR_STATEMENTS
+	String statementsFileName = Configuration.getDirStatements()
 		+ baseName.substring(0, baseName.indexOf(".csv")) + "_1.csv";
 	File additionalStatements = new File(statementsFileName);
 	if (additionalStatements.canRead()) {

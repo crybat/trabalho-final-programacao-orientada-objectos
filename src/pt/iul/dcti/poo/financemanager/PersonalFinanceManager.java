@@ -18,7 +18,7 @@ public class PersonalFinanceManager {
     }
 
     private void loadAccounts() {
-	File accountsDir = new File(Configuration.DIR_ACCOUNTS);
+	File accountsDir = new File(Configuration.getDirAccounts());
 
 	for (File file : accountsDir.listFiles(accountFileNameFilter)) {
 	    Account acc;

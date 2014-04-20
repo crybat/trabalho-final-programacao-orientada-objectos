@@ -10,15 +10,15 @@ public class DraftAccount extends Account {
 
     @Override
     public double estimatedAverageBalance() {
-	double estimation = 0.0;
-	int days = 1;
+	double sum = 0.0;
+	int count = 1;
 
 	for (StatementLine statement : getStatements()) {
-	    estimation += days * statement.getAvailableBalance();
-	    days++;
+	    sum += count * statement.getAvailableBalance();
+	    count++;
 	}
 
-	return estimation / days;
+	return sum / count;
     }
 
     @Override

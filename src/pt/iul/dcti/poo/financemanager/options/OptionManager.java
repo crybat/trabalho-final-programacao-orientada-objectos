@@ -3,11 +3,11 @@ package pt.iul.dcti.poo.financemanager.options;
 import java.util.HashMap;
 import java.util.Map;
 
-public class OptionManager<T, O extends Option> {
+public class OptionManager<K, V extends Option> {
 
-    private Map<T, O> options;
+    private Map<K, V> options;
 
-    public OptionManager(Map<T, O> options) {
+    public OptionManager(Map<K, V> options) {
 	this.options = options;
     }
 
@@ -15,7 +15,7 @@ public class OptionManager<T, O extends Option> {
 	options = new HashMap<>();
     }
 
-    public void executeOption(T key) {
+    public void executeOption(K key) {
 	if (options.containsKey(key)) {
 	    options.get(key).executeOption();
 	} else {
@@ -23,7 +23,7 @@ public class OptionManager<T, O extends Option> {
 	}
     }
 
-    public void put(T key, O option) {
+    public void put(K key, V option) {
 	options.put(key, option);
     }
 

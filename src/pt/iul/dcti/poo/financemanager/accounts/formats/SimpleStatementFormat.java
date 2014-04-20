@@ -6,7 +6,7 @@ public class SimpleStatementFormat implements StatementLineFormat {
 
     @Override
     public String fields() {
-	return "Date \t\tDescription \tDraft \tCredit \tAvailable balance ";
+	return "Date \tDescription \tDraft \tCredit \tAvailable balance ";
     }
 
     @Override

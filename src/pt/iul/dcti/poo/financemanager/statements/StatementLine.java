@@ -12,7 +12,6 @@ import pt.iul.dcti.poo.financemanager.statements.parsers.ScannerStatementLinePar
 
 public class StatementLine implements Comparable<StatementLine> {
 
-    public static final String DATE_FORMAT = "dd-MM-yyyy";
     private static final StatementLineFormat formatter = new LongStatementFormat();
 
     public static StatementLine newStatementLine(Scanner s)

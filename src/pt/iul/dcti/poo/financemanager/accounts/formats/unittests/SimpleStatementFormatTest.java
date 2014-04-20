@@ -37,7 +37,7 @@ public class SimpleStatementFormatTest {
     @Test
     public void testFormat() {
 	assertEquals(f.format(s1),
-		"01-01-2014 \tdescription \t0.0 	22.0 \t1542.0");
+		"01-01-2014 \tdescription \t0.0 \t22.0 \t1542.0");
 	assertEquals(f.format(s2),
 		"02-01-2014 \tdescription ... \t-10.0 \t220.0 \t1730.0");
     }
@@ -45,7 +45,7 @@ public class SimpleStatementFormatTest {
     @Test
     public void testFields() {
 	assertEquals(f.fields(),
-		"Date \t\tDescription \tDraft \tCredit \tAvailable balance ");
+		"Date \tDescription \tDraft \tCredit \tAvailable balance ");
     }
 
 }

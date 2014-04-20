@@ -39,8 +39,8 @@ public class MonthlySummaryOption implements Option {
 
 	Date[] months = monthly.keySet().toArray(new Date[0]);
 	Arrays.sort(months);
-	StringBuilder b = new StringBuilder();
-	b.append(PersonalFinanceManagerUserInterface.OPT_MONTHLY_SUMMARY)
+	StringBuilder b = new StringBuilder()
+		.append(PersonalFinanceManagerUserInterface.OPT_MONTHLY_SUMMARY)
 		.append("\n");
 
 	for (Date month : months) {

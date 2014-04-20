@@ -32,7 +32,7 @@ public class PersonalFinanceManagerUserInterface {
 
     public void execute() {
 	while (true) {
-	    opts.executeOption(Menu.requestSelection(Configuration.APP_TITLE,
+	    opts.executeOption(Menu.requestSelection(Configuration.getAppTitle(),
 		    OPTIONS));
 	}
     }
