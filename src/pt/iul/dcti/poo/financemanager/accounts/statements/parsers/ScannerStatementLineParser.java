@@ -1,4 +1,4 @@
-package pt.iul.dcti.poo.financemanager.statements.parsers;
+package pt.iul.dcti.poo.financemanager.accounts.statements.parsers;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -13,9 +13,9 @@ import java.util.regex.Pattern;
 
 import pt.iul.dcti.poo.financemanager.Configuration;
 import pt.iul.dcti.poo.financemanager.accounts.Account;
+import pt.iul.dcti.poo.financemanager.accounts.statements.StatementLine;
 import pt.iul.dcti.poo.financemanager.date.Date;
 import pt.iul.dcti.poo.financemanager.exceptions.BadFormatException;
-import pt.iul.dcti.poo.financemanager.statements.StatementLine;
 
 public class ScannerStatementLineParser implements StatementLineParser<Scanner> {
 

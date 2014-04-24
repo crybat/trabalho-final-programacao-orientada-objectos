@@ -8,24 +8,28 @@ import java.util.TreeSet;
 
 import pt.iul.dcti.poo.financemanager.Configuration;
 import pt.iul.dcti.poo.financemanager.accounts.parsers.FileAccountParser;
+import pt.iul.dcti.poo.financemanager.accounts.statements.StatementLine;
+import pt.iul.dcti.poo.financemanager.accounts.statements.parsers.ScannerStatementLineParser;
 import pt.iul.dcti.poo.financemanager.date.Date;
-import pt.iul.dcti.poo.financemanager.statements.StatementLine;
-import pt.iul.dcti.poo.financemanager.statements.parsers.ScannerStatementLineParser;
 
 public abstract class Account {
 
     public static Account newAccount(File file) throws IOException,
             ParseException {
+
         Account acc = new FileAccountParser().parseAccount(file);
         ScannerStatementLineParser.populateAccount(acc, file);
+
         String baseName = file.getName();
         String statementsFileName = Configuration.getDirStatements()
                 + baseName.substring(0, baseName.indexOf(".csv")) + "_1.csv";
+
         File additionalStatements = new File(statementsFileName);
         if (additionalStatements.canRead()) {
             ScannerStatementLineParser.populateAccount(acc,
                     additionalStatements);
         }
+
         return acc;
     }
 

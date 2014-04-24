@@ -1,6 +1,6 @@
 package pt.iul.dcti.poo.financemanager.accounts.formats;
 
-import pt.iul.dcti.poo.financemanager.statements.StatementLine;
+import pt.iul.dcti.poo.financemanager.accounts.statements.StatementLine;
 
 public class SimpleStatementFormat implements StatementLineFormat {
 

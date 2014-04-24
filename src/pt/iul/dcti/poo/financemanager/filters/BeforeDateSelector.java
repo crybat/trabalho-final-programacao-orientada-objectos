@@ -1,7 +1,7 @@
 package pt.iul.dcti.poo.financemanager.filters;
 
+import pt.iul.dcti.poo.financemanager.accounts.statements.StatementLine;
 import pt.iul.dcti.poo.financemanager.date.Date;
-import pt.iul.dcti.poo.financemanager.statements.StatementLine;
 
 public class BeforeDateSelector implements Selector<StatementLine> {
 

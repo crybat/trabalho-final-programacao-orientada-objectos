@@ -1,14 +1,14 @@
-package pt.iul.dcti.poo.financemanager.statements;
+package pt.iul.dcti.poo.financemanager.accounts.statements;
 
 import java.text.ParseException;
 import java.util.Scanner;
 
 import pt.iul.dcti.poo.financemanager.accounts.formats.LongStatementFormat;
 import pt.iul.dcti.poo.financemanager.accounts.formats.StatementLineFormat;
+import pt.iul.dcti.poo.financemanager.accounts.statements.parsers.ScannerStatementLineParser;
 import pt.iul.dcti.poo.financemanager.categories.Category;
 import pt.iul.dcti.poo.financemanager.date.Date;
 import pt.iul.dcti.poo.financemanager.exceptions.BadFormatException;
-import pt.iul.dcti.poo.financemanager.statements.parsers.ScannerStatementLineParser;
 
 public class StatementLine implements Comparable<StatementLine> {
 

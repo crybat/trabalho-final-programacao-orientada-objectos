@@ -17,9 +17,9 @@ import pt.iul.dcti.poo.financemanager.accounts.Account;
 import pt.iul.dcti.poo.financemanager.accounts.BanksConstants;
 import pt.iul.dcti.poo.financemanager.accounts.DraftAccount;
 import pt.iul.dcti.poo.financemanager.accounts.SavingsAccount;
+import pt.iul.dcti.poo.financemanager.accounts.statements.StatementLine;
 import pt.iul.dcti.poo.financemanager.date.Date;
 import pt.iul.dcti.poo.financemanager.exceptions.BadFormatException;
-import pt.iul.dcti.poo.financemanager.statements.StatementLine;
 
 public class AccountTest {
 

@@ -5,8 +5,8 @@ import java.util.Map;
 import pt.iul.dcti.poo.financemanager.PersonalFinanceManager;
 import pt.iul.dcti.poo.financemanager.accounts.Account;
 import pt.iul.dcti.poo.financemanager.accounts.formats.StatementLineFormat;
+import pt.iul.dcti.poo.financemanager.accounts.statements.StatementLine;
 import pt.iul.dcti.poo.financemanager.gui.PersonalFinanceManagerUserInterface;
-import pt.iul.dcti.poo.financemanager.statements.StatementLine;
 import pt.iul.dcti.poo.utils.Menu;
 
 public class AccountStatementOption implements Option {

@@ -6,10 +6,10 @@ import static org.junit.Assert.assertTrue;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import pt.iul.dcti.poo.financemanager.accounts.statements.StatementLine;
 import pt.iul.dcti.poo.financemanager.categories.Category;
 import pt.iul.dcti.poo.financemanager.date.Date;
 import pt.iul.dcti.poo.financemanager.filters.NoCategorySelector;
-import pt.iul.dcti.poo.financemanager.statements.StatementLine;
 
 /**
  * 

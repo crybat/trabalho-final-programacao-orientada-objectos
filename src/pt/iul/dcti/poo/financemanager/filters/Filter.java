@@ -1,6 +1,6 @@
 package pt.iul.dcti.poo.financemanager.filters;
 
-import java.util.List;
+import java.util.Collection;
 
 /**
  * 
@@ -25,11 +25,11 @@ public class Filter<T, F extends Selector<T>> {
     }
 
     @SuppressWarnings("unchecked")
-    public List<T> apply(List<T> list) {
-        List<T> selected = null;
+    public Collection<T> apply(Collection<T> collection) {
+        Collection<T> selected = null;
         try {
-            selected = list.getClass().newInstance();
-            for (T item : list) {
+            selected = collection.getClass().newInstance();
+            for (T item : collection) {
                 if (selector.isSelected(item))
                     selected.add(item);
             }

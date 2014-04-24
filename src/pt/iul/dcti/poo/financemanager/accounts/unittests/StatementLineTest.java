@@ -15,10 +15,10 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import pt.iul.dcti.poo.financemanager.accounts.statements.StatementLine;
 import pt.iul.dcti.poo.financemanager.categories.Category;
 import pt.iul.dcti.poo.financemanager.date.Date;
 import pt.iul.dcti.poo.financemanager.exceptions.BadFormatException;
-import pt.iul.dcti.poo.financemanager.statements.StatementLine;
 
 public class StatementLineTest {
 
