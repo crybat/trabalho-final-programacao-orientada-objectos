@@ -10,6 +10,7 @@ import java.util.Collection;
  * 
  */
 public class Filter<T, F extends Selector<T>> {
+
     F selector;
 
     protected Filter() {
@@ -24,12 +25,16 @@ public class Filter<T, F extends Selector<T>> {
         this.selector = selector;
     }
 
+    protected Selector<T> getSelector() {
+        return selector;
+    }
+
     @SuppressWarnings("unchecked")
-    public Collection<T> apply(Collection<T> collection) {
+    public Collection<T> apply(Collection<T> list) {
         Collection<T> selected = null;
         try {
-            selected = collection.getClass().newInstance();
-            for (T item : collection) {
+            selected = list.getClass().newInstance();
+            for (T item : list) {
                 if (selector.isSelected(item))
                     selected.add(item);
             }
@@ -42,22 +47,5 @@ public class Filter<T, F extends Selector<T>> {
         }
 
         return selected;
-    }
-
-    // public List<T> apply(List<T> list) {
-    // //List<T> selected = newList();
-    // List<T> selected = new LinkedList<T>();
-    // for (T item: list) {
-    // if (getSelector().isSelected(item)) {
-    // selected.add(item);
-    // }
-    // }
-    // return selected;
-    // }
-
-    // protected abstract List<T> newList();
-
-    protected Selector<T> getSelector() {
-        return selector;
     }
 }

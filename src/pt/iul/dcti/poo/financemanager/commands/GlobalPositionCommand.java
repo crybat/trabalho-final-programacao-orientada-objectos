@@ -1,23 +1,24 @@
-package pt.iul.dcti.poo.financemanager.options;
+package pt.iul.dcti.poo.financemanager.commands;
 
+import pt.iul.dcti.poo.comands.Command;
 import pt.iul.dcti.poo.financemanager.PersonalFinanceManager;
 import pt.iul.dcti.poo.financemanager.accounts.Account;
 import pt.iul.dcti.poo.financemanager.accounts.formats.AccountFormat;
 import pt.iul.dcti.poo.financemanager.gui.PersonalFinanceManagerUserInterface;
 
-public class GlobalPositionOption implements Option {
+public class GlobalPositionCommand implements Command {
 
-    private PersonalFinanceManager pfm;
-    private AccountFormat formatter;
+    private final PersonalFinanceManager pfm;
+    private final AccountFormat formatter;
 
-    public GlobalPositionOption(PersonalFinanceManager pfm,
+    public GlobalPositionCommand(PersonalFinanceManager pfm,
             AccountFormat formatter) {
         this.pfm = pfm;
         this.formatter = formatter;
     }
 
     @Override
-    public void executeOption() {
+    public void executeCommand() {
         double totalBalance = 0.0;
         StringBuilder b = new StringBuilder();
 

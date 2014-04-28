@@ -1,15 +1,16 @@
 package pt.iul.dcti.poo.financemanager;
 
+import pt.iul.dcti.poo.comands.Command;
+import pt.iul.dcti.poo.comands.CommandReceiver;
 import pt.iul.dcti.poo.financemanager.accounts.formats.BalanceAccountFormat;
 import pt.iul.dcti.poo.financemanager.accounts.formats.SimpleStatementFormat;
+import pt.iul.dcti.poo.financemanager.commands.AccountStatementCommand;
+import pt.iul.dcti.poo.financemanager.commands.ExitCommand;
+import pt.iul.dcti.poo.financemanager.commands.GlobalPositionCommand;
+import pt.iul.dcti.poo.financemanager.commands.ListCategoriesCommand;
+import pt.iul.dcti.poo.financemanager.commands.MetricsCommand;
+import pt.iul.dcti.poo.financemanager.commands.MonthlySummaryCommand;
 import pt.iul.dcti.poo.financemanager.gui.PersonalFinanceManagerUserInterface;
-import pt.iul.dcti.poo.financemanager.options.AccountStatementOption;
-import pt.iul.dcti.poo.financemanager.options.ExitOption;
-import pt.iul.dcti.poo.financemanager.options.GlobalPositionOption;
-import pt.iul.dcti.poo.financemanager.options.MetricsOption;
-import pt.iul.dcti.poo.financemanager.options.MonthlySummaryOption;
-import pt.iul.dcti.poo.financemanager.options.Option;
-import pt.iul.dcti.poo.financemanager.options.OptionManager;
 
 /**
  * 
@@ -19,32 +20,32 @@ import pt.iul.dcti.poo.financemanager.options.OptionManager;
 public class Main {
 
     /*
-     * TODO SavingsAccount::estimatedAverageBalance TODO Statements em TreeSet?
-     * TODO Categories TODO Save
+     * TODO Resto da análise
+     * TODO Guardar contas
      */
 
     public static void main(String[] args) {
-        PersonalFinanceManager personalFinanceManager = new PersonalFinanceManager();
+        PersonalFinanceManager pfm = new PersonalFinanceManager();
 
-        OptionManager<String, Option> options = new OptionManager<>();
-        OptionManager<String, Option> metricsOptions = new OptionManager<>();
+        CommandReceiver<String, Command> options = new CommandReceiver<>();
+        CommandReceiver<String, Command> metricsOptions = new CommandReceiver<>();
 
-        Option exit = new ExitOption();
-        options.put(null, exit);
+        Command exit = new ExitCommand(pfm);
+        options.put(null, exit); // cancel
         options.put(PersonalFinanceManagerUserInterface.OPT_EXIT, exit);
 
         options.put(PersonalFinanceManagerUserInterface.OPT_GLOBAL_POSITION,
-                new GlobalPositionOption(personalFinanceManager,
-                        new BalanceAccountFormat()));
+                new GlobalPositionCommand(pfm, new BalanceAccountFormat()));
         options.put(PersonalFinanceManagerUserInterface.OPT_ACCOUNT_STATEMENT,
-                new AccountStatementOption(personalFinanceManager,
-                        new SimpleStatementFormat()));
+                new AccountStatementCommand(pfm, new SimpleStatementFormat()));
+        options.put(PersonalFinanceManagerUserInterface.OPT_LIST_CATEGORIES,
+                new ListCategoriesCommand(pfm));
         options.put(PersonalFinanceManagerUserInterface.OPT_ANALISE,
-                new MetricsOption(metricsOptions));
+                new MetricsCommand(metricsOptions));
 
         metricsOptions.put(
                 PersonalFinanceManagerUserInterface.OPT_MONTHLY_SUMMARY,
-                new MonthlySummaryOption(personalFinanceManager));
+                new MonthlySummaryCommand(pfm));
 
         new PersonalFinanceManagerUserInterface(options).execute();
     }

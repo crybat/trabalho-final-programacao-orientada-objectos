@@ -2,7 +2,9 @@ package pt.iul.dcti.poo.financemanager.accounts;
 
 public class AccountFactory {
 
-    public Account createAccount(String type, long number, String name) {
+    public Account createAccount(String type, long number, String name)
+            throws ClassNotFoundException {
+
         switch (type) {
         case "DraftAccount":
             return new DraftAccount(number, name);
@@ -14,7 +16,7 @@ public class AccountFactory {
             return new VIPAccount(number, name);
         }
 
-        return null;
+        throw new ClassNotFoundException("Account type not found");
     }
 
 }

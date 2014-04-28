@@ -15,7 +15,7 @@ import pt.iul.dcti.poo.financemanager.date.Date;
 public abstract class Account {
 
     public static Account newAccount(File file) throws IOException,
-            ParseException {
+            ParseException, ClassNotFoundException {
 
         Account acc = new FileAccountParser().parseAccount(file);
         ScannerStatementLineParser.populateAccount(acc, file);
@@ -39,23 +39,33 @@ public abstract class Account {
     private SortedSet<StatementLine> statements = new TreeSet<>();
     private String currency;
 
-    public Account(long id, String name) {
-        this.id = id;
+    public abstract double getInterestRate();
+
+    public abstract double estimatedAverageBalance();
+
+    public Account(long id, String name) throws IllegalArgumentException {
+        setId(id);
         setName(name);
     }
 
-    public void addStatementLine(StatementLine statementLine) {
-        if (statementLine == null)
-            return;
+    private void setId(long id) throws IllegalArgumentException {
+        validateId(id);
+        this.id = id;
+    }
 
+    public void addStatementLine(StatementLine statementLine)
+            throws IllegalArgumentException {
+        validateStatementLine(statementLine);
         statements.add(statementLine);
     }
 
-    public void setName(String name) {
+    public void setName(String name) throws IllegalArgumentException {
+        validateName(name);
         this.name = name;
     }
 
-    public void setCurrency(String currency) {
+    public void setCurrency(String currency) throws IllegalArgumentException {
+        validateCurrency(currency);
         this.currency = currency;
     }
 
@@ -103,8 +113,27 @@ public abstract class Account {
         return !statements.isEmpty();
     }
 
-    public abstract double getInterestRate();
+    private void validateCurrency(String currency)
+            throws IllegalArgumentException {
+        if (currency == null || currency.trim().isEmpty())
+            throw new IllegalArgumentException("Currency must not be empty");
+    }
 
-    public abstract double estimatedAverageBalance();
+    private void validateName(String name) throws IllegalArgumentException {
+        if (name == null || name.trim().isEmpty())
+            throw new IllegalArgumentException("Currency must not be empty");
+    }
+
+    private void validateStatementLine(StatementLine statementLine)
+            throws IllegalArgumentException {
+        if (statementLine == null)
+            throw new IllegalArgumentException(
+                    "Statement Line must not be null");
+    }
+
+    private void validateId(long id) throws IllegalArgumentException {
+        if (id < 0)
+            throw new IllegalArgumentException("ID must be a positive long");
+    }
 
 }

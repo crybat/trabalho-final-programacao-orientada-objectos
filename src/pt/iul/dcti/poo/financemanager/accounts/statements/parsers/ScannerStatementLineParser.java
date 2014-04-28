@@ -19,18 +19,6 @@ import pt.iul.dcti.poo.financemanager.exceptions.BadFormatException;
 
 public class ScannerStatementLineParser implements StatementLineParser<Scanner> {
 
-    private static final Pattern PATTERN = Pattern
-            .compile("(\\d{2}-\\d{2}-\\d{4})\\s*;" // Date
-                    + "(\\d{2}-\\d{2}-\\d{4})\\s*;" // Value Date
-                    + "([\\w\\s]+);" // Description
-                    + "(-\\d+\\.?\\d*|0\\.?0?)*\\s*;" // Draft
-                    + "(\\d+\\.?\\d*)*\\s*;" // Credit
-                    + "(-?\\d+\\.?\\d*)*\\s*;" // Accounting balance
-                    + "(-?\\d+\\.?\\d*)*\\s*;?" // Available Balance
-            );
-    private static final DateFormat DATE_PARSER = new SimpleDateFormat(
-            Configuration.getDateFormat());
-
     public static void populateAccount(Account acc, File file) {
 
         ScannerStatementLineParser p = new ScannerStatementLineParser();
@@ -44,9 +32,11 @@ public class ScannerStatementLineParser implements StatementLineParser<Scanner> 
                     sttmt = p.parseStatementLine(s);
                     acc.addStatementLine(sttmt);
                 } catch (BadFormatException | ParseException e) {
+                    // System.out.println(e.getMessage());
                 }
             }
         } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
     }
 
@@ -54,13 +44,25 @@ public class ScannerStatementLineParser implements StatementLineParser<Scanner> 
         return money == null ? 0.0 : Double.parseDouble(money);
     }
 
+    private static final Pattern PATTERN = Pattern
+            .compile("(\\d{2}-\\d{2}-\\d{4})\\s*;" // Date
+                    + "(\\d{2}-\\d{2}-\\d{4})\\s*;" // Value Date
+                    + "([\\w\\s]+);" // Description
+                    + "(-\\d+\\.?\\d*|0\\.?0?)*\\s*;" // Draft
+                    + "(\\d+\\.?\\d*)*\\s*;" // Credit
+                    + "(-?\\d+\\.?\\d*)*\\s*;" // Accounting balance
+                    + "(-?\\d+\\.?\\d*)*\\s*;?" // Available Balance
+            );
+
+    private static final DateFormat DATE_PARSER = new SimpleDateFormat(
+            Configuration.getDateFormat());
+
     @Override
     public StatementLine parseStatementLine(Scanner line)
             throws BadFormatException, ParseException {
 
-        if (line.findInLine(PATTERN) == null) {
+        if (line.findInLine(PATTERN) == null)
             throw new BadFormatException();
-        }
 
         MatchResult m = line.match();
 

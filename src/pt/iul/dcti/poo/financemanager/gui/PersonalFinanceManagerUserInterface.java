@@ -1,8 +1,8 @@
 package pt.iul.dcti.poo.financemanager.gui;
 
+import pt.iul.dcti.poo.comands.Command;
+import pt.iul.dcti.poo.comands.CommandReceiver;
 import pt.iul.dcti.poo.financemanager.Configuration;
-import pt.iul.dcti.poo.financemanager.options.Option;
-import pt.iul.dcti.poo.financemanager.options.OptionManager;
 import pt.iul.dcti.poo.utils.Menu;
 
 public class PersonalFinanceManagerUserInterface {
@@ -23,16 +23,16 @@ public class PersonalFinanceManagerUserInterface {
     private final String[] OPTIONS = { OPT_GLOBAL_POSITION,
             OPT_ACCOUNT_STATEMENT, OPT_LIST_CATEGORIES, OPT_ANALISE, OPT_EXIT };
 
-    private OptionManager<String, Option> opts;
+    private CommandReceiver<String, Command> opts;
 
     public PersonalFinanceManagerUserInterface(
-            OptionManager<String, Option> opts) {
+            CommandReceiver<String, Command> opts) {
         this.opts = opts;
     }
 
     public void execute() {
         while (true) {
-            opts.executeOption(Menu.requestSelection(
+            opts.executeCommand(Menu.requestSelection(
                     Configuration.getAppTitle(), OPTIONS));
         }
     }

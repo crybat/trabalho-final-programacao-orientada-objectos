@@ -14,7 +14,9 @@ public class FileAccountParser implements AccountParser<File> {
     private static final String SPLIT_STRING = ";";
 
     @Override
-    public Account parseAccount(File data) throws IOException, ParseException {
+    public Account parseAccount(File data) throws IOException, ParseException,
+            ClassNotFoundException {
+
         BufferedReader r = new BufferedReader(new FileReader(data));
         r.readLine();
         String[] header = r.readLine().split(SPLIT_STRING);

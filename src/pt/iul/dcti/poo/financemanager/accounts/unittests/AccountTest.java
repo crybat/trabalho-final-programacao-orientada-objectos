@@ -61,7 +61,7 @@ public class AccountTest {
 
     @Test
     public void testAccount2() throws ParseException, BadFormatException,
-            IOException {
+            ClassNotFoundException, IOException {
         Account acc = Account.newAccount(new File(
                 "account_info/1234567890989.csv"));
         assertEquals(acc.getId(), 1234567890989L);

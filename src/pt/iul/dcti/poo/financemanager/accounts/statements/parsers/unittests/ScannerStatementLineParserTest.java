@@ -1,4 +1,4 @@
-package pt.iul.dcti.poo.financemanager.statements.parsers.unittests;
+package pt.iul.dcti.poo.financemanager.accounts.statements.parsers.unittests;
 
 import static org.junit.Assert.assertTrue;
 

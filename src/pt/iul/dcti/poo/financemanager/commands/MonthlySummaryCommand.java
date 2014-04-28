@@ -1,20 +1,21 @@
-package pt.iul.dcti.poo.financemanager.options;
+package pt.iul.dcti.poo.financemanager.commands;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+import pt.iul.dcti.poo.comands.Command;
 import pt.iul.dcti.poo.financemanager.PersonalFinanceManager;
 import pt.iul.dcti.poo.financemanager.accounts.Account;
 import pt.iul.dcti.poo.financemanager.accounts.statements.StatementLine;
 import pt.iul.dcti.poo.financemanager.date.Date;
 import pt.iul.dcti.poo.financemanager.gui.PersonalFinanceManagerUserInterface;
 
-public class MonthlySummaryOption implements Option {
+public class MonthlySummaryCommand implements Command {
 
-    private Map<String, Account> accounts;
+    private final Map<String, Account> accounts;
 
-    public MonthlySummaryOption(PersonalFinanceManager pfm) {
+    public MonthlySummaryCommand(PersonalFinanceManager pfm) {
         this.accounts = pfm.getAccounts();
     }
 
@@ -28,7 +29,7 @@ public class MonthlySummaryOption implements Option {
     }
 
     @Override
-    public void executeOption() {
+    public void executeCommand() {
         Map<Date, Double> monthly = new HashMap<>();
 
         for (Account account : accounts.values()) {
@@ -37,7 +38,7 @@ public class MonthlySummaryOption implements Option {
             }
         }
 
-        Date[] months = monthly.keySet().toArray(new Date[0]);
+        Date[] months = monthly.keySet().toArray(new Date[monthly.size()]);
         Arrays.sort(months);
         StringBuilder b = new StringBuilder().append(
                 PersonalFinanceManagerUserInterface.OPT_MONTHLY_SUMMARY)
