@@ -38,10 +38,15 @@ public abstract class Account {
     private String additionalInfo = "";
     private SortedSet<StatementLine> statements = new TreeSet<>();
     private String currency;
+    private double interestRate = 1.0;
 
-    public abstract double getInterestRate();
+    public double getInterestRate() {
+        return interestRate;
+    }
 
     public abstract double estimatedAverageBalance();
+    
+    public abstract double yearlyInterestEstimate();
 
     public Account(long id, String name) throws IllegalArgumentException {
         setId(id);
@@ -67,6 +72,11 @@ public abstract class Account {
     public void setCurrency(String currency) throws IllegalArgumentException {
         validateCurrency(currency);
         this.currency = currency;
+    }
+    
+    public void setInterestRate(double interestRate) throws IllegalArgumentException {
+        validateInterestRate(interestRate);
+        this.interestRate = interestRate;
     }
 
     public long getId() {
@@ -122,6 +132,11 @@ public abstract class Account {
     private void validateName(String name) throws IllegalArgumentException {
         if (name == null || name.trim().isEmpty())
             throw new IllegalArgumentException("Currency must not be empty");
+    }
+    
+    private void validateInterestRate(double interestRate) {
+        if (interestRate < 0.0)
+            throw new IllegalArgumentException("Interest rate must be positive");
     }
 
     private void validateStatementLine(StatementLine statementLine)

@@ -37,9 +37,12 @@ public class CategoryIndex {
         return false;
     }
 
-    public boolean hasCategoryByName(String name)
-            throws IllegalArgumentException {
+    public boolean hasCategoryByName(String name) {
         return categories.contains(new Category(name));
+    }
+    
+    public boolean hasCategory(Category c) {
+        return categories.contains(c);
     }
 
     /*

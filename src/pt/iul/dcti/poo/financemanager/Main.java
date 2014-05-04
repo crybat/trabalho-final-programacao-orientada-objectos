@@ -5,6 +5,7 @@ import pt.iul.dcti.poo.comands.CommandReceiver;
 import pt.iul.dcti.poo.financemanager.accounts.formats.BalanceAccountFormat;
 import pt.iul.dcti.poo.financemanager.accounts.formats.SimpleStatementFormat;
 import pt.iul.dcti.poo.financemanager.commands.AccountStatementCommand;
+import pt.iul.dcti.poo.financemanager.commands.AnualInterestCommand;
 import pt.iul.dcti.poo.financemanager.commands.ExitCommand;
 import pt.iul.dcti.poo.financemanager.commands.GlobalPositionCommand;
 import pt.iul.dcti.poo.financemanager.commands.ListCategoriesCommand;
@@ -20,8 +21,7 @@ import pt.iul.dcti.poo.financemanager.gui.PersonalFinanceManagerUserInterface;
 public class Main {
 
     /*
-     * TODO Resto da análise
-     * TODO Guardar contas
+     * TODO Resto da análise TODO Guardar contas
      */
 
     public static void main(String[] args) {
@@ -46,6 +46,9 @@ public class Main {
         metricsOptions.put(
                 PersonalFinanceManagerUserInterface.OPT_MONTHLY_SUMMARY,
                 new MonthlySummaryCommand(pfm));
+        metricsOptions.put(
+                PersonalFinanceManagerUserInterface.OPT_ANUAL_INTEREST,
+                new AnualInterestCommand(pfm));
 
         new PersonalFinanceManagerUserInterface(options).execute();
     }

@@ -39,8 +39,6 @@ public class ChooseCategoryCommand implements Command {
         } else {
             chooseCategory();
         }
-
-        System.out.println(categoryIndex);
     }
 
     private void insertCategory() {
@@ -58,10 +56,7 @@ public class ChooseCategoryCommand implements Command {
                                 .getCategoryByName(choice);
                     } else {
                         chosenCategory = new Category(choice);
-                        categoryIndex.addCategory(chosenCategory);
                     }
-
-                    chosenCategory.addDescription(description);
 
                 } catch (IllegalArgumentException e) {
                     System.out.println(e.getMessage());
@@ -80,7 +75,6 @@ public class ChooseCategoryCommand implements Command {
             insertCategory();
         } else {
             chosenCategory = categoryIndex.getCategoryByName(choice);
-            chosenCategory.addDescription(description);
         }
     }
 

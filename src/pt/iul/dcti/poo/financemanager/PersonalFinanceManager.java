@@ -44,24 +44,39 @@ public class PersonalFinanceManager {
 
             for (StatementLine statementLine : sttmts) {
 
-                final ChooseCategoryCommand cco = new ChooseCategoryCommand(this);
-                Category category = null;
+                final ChooseCategoryCommand cco = new ChooseCategoryCommand(
+                        this);
                 String description = statementLine.getDescription();
 
-                if (categoryIndex.hasCategoryByDescription(description)) {
-                    // Descrição existe
-                    category = categoryIndex
-                            .getCategoryByDescription(description);
-                } else {
-                    // Descrição não existe
-                    cco.setDescription(description);
-                    cco.executeCommand();
-                    category = cco.getChosenCategory();
-                }
+                // encontrar ou criar categoria para a descrição
+                Category category = findOrCreateCategoryForDescription(
+                        description, cco, categoryIndex);
 
+                // adicionar descrição à categoria
+                category.addDescription(description);
+                // relacionar com statement line
                 statementLine.setCategory(category);
+
+                if (!categoryIndex.hasCategory(category)) {
+                    // actualização, é necessário imprimir categorias
+                    categoryIndex.addCategory(category);
+                    System.out.println(categoryIndex);
+                }
             }
         }
+    }
+
+    private static Category findOrCreateCategoryForDescription(
+            String description, ChooseCategoryCommand cmd, CategoryIndex ci) {
+
+        if (ci.hasCategoryByDescription(description))
+            // Descrição já existe no índice
+            return ci.getCategoryByDescription(description);
+
+        // Descrição não existe no índice
+        cmd.setDescription(description);
+        cmd.executeCommand();
+        return cmd.getChosenCategory();
     }
 
     private void loadCategoryIndex() {

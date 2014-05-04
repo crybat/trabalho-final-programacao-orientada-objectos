@@ -8,14 +8,12 @@ public class VIPAccount extends Account {
 
     @Override
     public double estimatedAverageBalance() {
-        // TODO Auto-generated method stub
-        return 0;
+        return getCurrentBalance();
     }
 
     @Override
-    public double getInterestRate() {
-        // TODO Auto-generated method stub
-        return 0;
+    public double yearlyInterestEstimate() {
+        return getCurrentBalance() * getInterestRate();
     }
 
 }

@@ -8,13 +8,12 @@ public class SavingsAccount extends Account {
 
     @Override
     public double estimatedAverageBalance() {
-        // TODO ?
         return getCurrentBalance();
     }
 
     @Override
-    public double getInterestRate() {
-        return BanksConstants.savingsInterestRate();
+    public double yearlyInterestEstimate() {
+        return getCurrentBalance() * getInterestRate();
     }
 
 }
