@@ -7,10 +7,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import pt.iul.dcti.poo.financemanager.accounts.Account;
@@ -26,22 +23,10 @@ public class AccountTest {
     private static Account a1;
     private Account a5;
 
-    @BeforeClass
-    public static void setUpBeforeClass() throws Exception {
-        a1 = new DraftAccount(12345, "DRAFT_ACC");
-    }
-
-    @AfterClass
-    public static void tearDownAfterClass() throws Exception {
-    }
-
     @Before
     public void setUp() throws Exception {
+        a1 = new DraftAccount(12345, "DRAFT_ACC");
         a5 = Account.newAccount(new File("account_info/1234567890989.csv"));
-    }
-
-    @After
-    public void tearDown() throws Exception {
     }
 
     @Test
@@ -60,8 +45,7 @@ public class AccountTest {
     }
 
     @Test
-    public void testAccount2() throws ParseException, BadFormatException,
-            ClassNotFoundException, IOException {
+    public void testAccount2() throws ParseException, BadFormatException, ClassNotFoundException, IOException {
         Account acc = Account.newAccount(new File(
                 "account_info/1234567890989.csv"));
         assertEquals(acc.getId(), 1234567890989L);
@@ -86,6 +70,15 @@ public class AccountTest {
         assertEquals(a1.estimatedAverageBalance(), 1542.0, 0.001);
         assertEquals(a1.getStartDate(), new Date(1, 1, 2014));
         assertEquals(a1.getEndDate(), new Date(2, 1, 2014));
+    }
+    
+    @Test
+    public void testEstimatedAverageBalance() {
+        a1.addStatementLine(new StatementLine(new Date(1, 1, 2014), new Date(1,
+                1, 2014), "description", 0.0, 22, 1520, 10, null));
+        a1.addStatementLine(new StatementLine(new Date(4, 1, 2014), new Date(2,
+                1, 2014), "description", 0.0, 0.0, 1542, 20, null));
+        assertEquals(12.5, a1.estimatedAverageBalance(), 0.001);
     }
 
     @Test

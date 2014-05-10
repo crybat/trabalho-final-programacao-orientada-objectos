@@ -16,4 +16,9 @@ public class SavingsAccount extends Account {
         return getCurrentBalance() * getInterestRate();
     }
 
+    @Override
+    public double getInterestRate() {
+        return BanksConstants.savingsInterestRate();
+    }
+
 }

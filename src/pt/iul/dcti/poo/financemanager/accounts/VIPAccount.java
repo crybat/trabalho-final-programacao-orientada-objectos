@@ -16,4 +16,10 @@ public class VIPAccount extends Account {
         return getCurrentBalance() * getInterestRate();
     }
 
+    @Override
+    public double getInterestRate() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
 }
