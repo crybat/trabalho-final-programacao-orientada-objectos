@@ -20,7 +20,7 @@ public class CommandReceiver<K, V extends Command> {
             options.get(key).executeCommand();
     }
 
-    public void put(K key, V option) {
+    public void putCommand(K key, V option) {
         options.put(key, option);
     }
 

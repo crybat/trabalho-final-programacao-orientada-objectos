@@ -1,21 +1,70 @@
-V2.1
-Corrected 
-	Category: Object getname() -> String getName()
-	StatementLine extra constructor removed
-	StatementLine output types revised
-	getType & getTypeName functions removed from account hierarchy	
-Added packages
-	pt.iul.dcti.poo.financemanager.accounts.formats;
-	pt.iul.dcti.poo.financemanager.accounts.formats.unittests;
-	pt.iul.dcti.poo.financemanager.filters;
-	pt.iul.dcti.poo.financemanager.filters.unittests;
-Added classes
-	BadFormatException
-	BadStatementException
-Added method
-	Date.diffInDays(Date d2)
-V2.2
-Added account names to configuration files
-Changed parameter names in Category and Account subclasses to improve readability
+Código:
+
+Versão 1.0: Versão inicial
+Versão 1.2:
+Adicionado @Test num dos testes em Account
+Alteradas as extensões dos ficheiros em account_info para csv
+Versão 2.1:
+Corrigido
+Category: Object getname() -> String getName()
+StatementLine constructor extra removido
+StatementLine tipode de retorno das funções revistos
+Funções getType e getTypeName removidas da hierarquia Account
+Adicionadas as packages
+pt.iul.dcti.poo.financemanager.accounts.formats;
+pt.iul.dcti.poo.financemanager.accounts.formats.unittests;
+pt.iul.dcti.poo.financemanager.filters;
+pt.iul.dcti.poo.financemanager.filters.unittests;
+Adicionadas as classes
+BadFormatException
+BadStatementException
+Versão 2.2
+Adicionados nomes de contas aos ficheiros de configuração
+Alterados nomes dos parâmetros de Category e sub-classes de Account de modo a serem mais explícitos
+Versão 2.4
+Correções de gralhas nas unidades de teste (AccountTest, SavingsAccountTest e StatementLineTest)
+Correção de valores de saldos incoerentes com movimentos nos .csv
+Correção da diferença entre datas para datas antes e depois da mudança da hora de verão para hora de inverno
+Versão 2.5
+Correcções em accountTest (teste testAccount2())
+Versão 2.6
+Alteração dos testes de formatos de modo a tornar expícitos os caracteres de tabulação.
+Versão 2.7
+Corrigidas assinaturas de construtores das contas para long m vez de int (1º parâmetro)
+Corrigido tabulador extra em SimpleStatementFormatTest
+Alterado o nome da função totalForCategory para totalDraftsForCategorySince
+Versão 3.1
+Alterada assinatura do método apply no interface Filter de modo a ser mais genérico (a pedido de alunos). A sua utilização passa a requerer um cast para o tipo específico de coleção usada.
+Adicionados testes e ficheiros de movimentos.
+Versão 3.2
+Alterações no teste AutoCategorizeStatements
+Alterada ponto e virgula nos movimentos (linha da legenda)
+totalForCategory soma só débitos (mudado o nome para totalDraftsForCategorySince)
+Corrigida data no penúltimo movimento da conta 1234567890989
+Alterações/Correções nos ficheiros .csv 
+Versão 3.3
+Corrigido FileAccountFrmatTest (data errada na penúltima linha)
+Corrigido testTotalForMonth() em AccountTest e SavingsAccountTest acrescentado novo teste testTotalForMonth2() em AccountTest
+Removidos ';' do final das legendas
+Corrigido testAddStatementLine() na VIPAccount
+
+Enunciado:
+
+Versão 1.1: Versão inicial
+Versão 1.2: Adicionada secção "Como começar ..." (penúltima página) - atualização importante!
+Versão 2.1: 
+Adicionadas as secções:
+Formatadores
+Formato dos ficheiros
+Filtros
+Como continuar ...
+Versão 2.2
+Adicionados/Explicados alguns requisitos de implementação
+Versão 2.4 (sairá após a primeira entrega)
+Tornada explícita a necessidade de ordenação dos movimentos
+Clarificação relativa ao resumo de gastos (para todas as contas) e de despesas por categoria (para uma conta)
+Versão 3.1
+Alterada assinatura do método apply no interface Filter de modo a ser mais genérico (a pedido de alunos). A sua utilização passa a requerer um cast para o tipo específico de coleção usada.
+Adicionados testes e ficheiros de movimentos.
 
  

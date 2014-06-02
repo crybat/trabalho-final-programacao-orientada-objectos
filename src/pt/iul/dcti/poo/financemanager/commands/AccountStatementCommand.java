@@ -8,7 +8,6 @@ import pt.iul.dcti.poo.financemanager.accounts.Account;
 import pt.iul.dcti.poo.financemanager.accounts.formats.StatementLineFormat;
 import pt.iul.dcti.poo.financemanager.accounts.statements.StatementLine;
 import pt.iul.dcti.poo.financemanager.gui.PersonalFinanceManagerUserInterface;
-import pt.iul.dcti.poo.utils.Menu;
 
 public class AccountStatementCommand implements Command {
 
@@ -23,7 +22,12 @@ public class AccountStatementCommand implements Command {
 
     @Override
     public void executeCommand() {
-        String accountID = chooseAccount();
+        String accountID = PersonalFinanceManagerUserInterface
+                .chooseAccount(accounts);
+
+        if (accountID == null)
+            return;
+
         StringBuilder b = new StringBuilder();
         b.append(PersonalFinanceManagerUserInterface.OPT_ACCOUNT_STATEMENT)
                 .append("\n").append(formatter.fields()).append("\n");
@@ -32,10 +36,5 @@ public class AccountStatementCommand implements Command {
         }
 
         System.out.println(b);
-    }
-
-    private String chooseAccount() {
-        String[] accountOptions = accounts.keySet().toArray(new String[accounts.size()]);
-        return Menu.requestSelection("Choose an Account", accountOptions);
     }
 }

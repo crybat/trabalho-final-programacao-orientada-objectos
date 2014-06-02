@@ -5,15 +5,19 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.SortedSet;
+import java.util.NavigableSet;
 
 import pt.iul.dcti.poo.financemanager.accounts.Account;
+import pt.iul.dcti.poo.financemanager.accounts.SavingsAccount;
 import pt.iul.dcti.poo.financemanager.accounts.statements.StatementLine;
+import pt.iul.dcti.poo.financemanager.accounts.statements.parsers.ScannerStatementLineParser;
+import pt.iul.dcti.poo.financemanager.accounts.utils.AccountUtils;
 import pt.iul.dcti.poo.financemanager.categories.Category;
 import pt.iul.dcti.poo.financemanager.categories.CategoryIndex;
 import pt.iul.dcti.poo.financemanager.commands.ChooseCategoryCommand;
+import pt.iul.dcti.poo.financemanager.exceptions.BadFormatException;
 import pt.iul.dcti.poo.financemanager.filters.NoCategorySelector;
 import pt.iul.dcti.poo.financemanager.filters.StatementLineFilter;
 import pt.iul.dcti.poo.persistence.Deserializer;
@@ -29,9 +33,11 @@ public class PersonalFinanceManager {
         fillInCategories();
     }
 
-    /*
-     * Pelo teste testNewStatementLine nao podemos preencher a categoria, e
-     * temos que usar os filtros
+    /**
+     * Devido à alteração na versão 3, e para não fazer isto tudo de novo, faço
+     * o loop duas vezes...
+     * 
+     * @see {@link pt.iul.dcti.poo.financemanager.accounts.Account#autoCategorizeStatements(List)}
      */
     private void fillInCategories() {
 
@@ -39,7 +45,7 @@ public class PersonalFinanceManager {
 
             final StatementLineFilter filter = new StatementLineFilter(
                     new NoCategorySelector());
-            SortedSet<StatementLine> sttmts = (SortedSet<StatementLine>) filter
+            NavigableSet<StatementLine> sttmts = (NavigableSet<StatementLine>) filter
                     .apply(account.getStatements());
 
             for (StatementLine statementLine : sttmts) {
@@ -55,7 +61,8 @@ public class PersonalFinanceManager {
                 // adicionar descrição à categoria
                 category.addDescription(description);
                 // relacionar com statement line
-                statementLine.setCategory(category);
+                // statementLine.setCategory(category); Tem que ser feito por
+                // Account#autoCategorizeStatements ...
 
                 if (!categoryIndex.hasCategory(category)) {
                     // actualização, é necessário imprimir categorias
@@ -63,6 +70,10 @@ public class PersonalFinanceManager {
                     System.out.println(categoryIndex);
                 }
             }
+        }
+
+        for (Account acc : accounts.values()) {
+            acc.autoCategorizeStatements(categoryIndex.getCategories());
         }
     }
 
@@ -79,29 +90,58 @@ public class PersonalFinanceManager {
         return cmd.getChosenCategory();
     }
 
+    /**
+     * Loads categories to the category index. Defaults to a new category index
+     * with preset categories, if existant.
+     */
     private void loadCategoryIndex() {
         try {
-            Set<Category> categories = new Deserializer<Set<Category>>()
+            List<Category> categories = new Deserializer<List<Category>>()
                     .deserialize(Configuration.getCategoriesFile());
             categoryIndex = new CategoryIndex(categories);
         } catch (ClassNotFoundException | IOException e) {
             categoryIndex = new CategoryIndex();
+            categoryIndex.addCategory(SavingsAccount.savingsCategory);
         }
     }
 
     private void loadAccounts() {
         File accountsDir = new File(Configuration.getDirAccounts());
+        File statementsDir = new File(Configuration.getDirStatements());
 
         for (File file : accountsDir.listFiles(accountFileNameFilter)) {
-            Account acc;
+            setUpNewAccount(file, statementsDir);
+        }
+
+        for (File file : statementsDir.listFiles(accountFileNameFilter)) {
+            String accId = null;
             try {
-                acc = Account.newAccount(file);
-                accounts.put(String.valueOf(acc.getId()), acc);
-            } catch (ClassNotFoundException | IOException | ParseException e) {
-                System.out.println("Ocorreu um erro ao processar o ficheiro '"
-                        + file.getName() + "'");
-                // e.printStackTrace();
+                accId = String.valueOf(AccountUtils.accountNumber(file));
+                if (!accounts.containsKey(accId)) {
+                    setUpNewAccount(file, statementsDir);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+                /*System.out.println("Nao foi possivel ler '" + file.getName()
+                        + "'");*/
             }
+        }
+    }
+
+    private void setUpNewAccount(File file, File sttmts) {
+        try {
+            Account acc = Account.newAccount(file);
+            accounts.put(String.valueOf(acc.getId()), acc);
+            for (File sttmtsFile : sttmts.listFiles(PersonalFinanceManager.accountFileNameFilter)) {
+                if (acc.getId() == AccountUtils.accountNumber(sttmtsFile))
+                    ScannerStatementLineParser.populateAccount(acc, sttmtsFile);
+            }
+        } catch (ClassNotFoundException | IOException | ParseException
+                | BadFormatException e) {
+            e.printStackTrace();
+            /*
+            System.out.println("Ocorreu um erro ao processar o ficheiro '"
+                    + file.getName() + "'");*/
         }
     }
 
@@ -113,7 +153,7 @@ public class PersonalFinanceManager {
         return categoryIndex;
     }
 
-    private static final FilenameFilter accountFileNameFilter = new FilenameFilter() {
+    public static final FilenameFilter accountFileNameFilter = new FilenameFilter() {
 
         @Override
         public boolean accept(File dir, String name) {

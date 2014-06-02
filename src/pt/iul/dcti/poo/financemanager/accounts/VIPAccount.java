@@ -2,8 +2,24 @@ package pt.iul.dcti.poo.financemanager.accounts;
 
 public class VIPAccount extends Account {
 
-    public VIPAccount(long id, String name) {
+    private double interestRate;
+
+    public VIPAccount(long id, String name, double interestRate) {
         super(id, name);
+        setInterestRate(interestRate);
+    }
+
+    private void setInterestRate(double interestRate)
+            throws IllegalArgumentException {
+        validateInterestRate(interestRate);
+        this.interestRate = interestRate;
+    }
+
+    private void validateInterestRate(double interestRate)
+            throws IllegalArgumentException {
+        if (interestRate < 0.0)
+            throw new IllegalArgumentException(
+                    "Interest Rate must be positive!");
     }
 
     @Override
@@ -18,8 +34,6 @@ public class VIPAccount extends Account {
 
     @Override
     public double getInterestRate() {
-        // TODO Auto-generated method stub
-        return 0;
+        return interestRate;
     }
-
 }

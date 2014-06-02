@@ -1,8 +1,11 @@
 package pt.iul.dcti.poo.financemanager.gui;
 
+import java.util.Map;
+
 import pt.iul.dcti.poo.comands.Command;
 import pt.iul.dcti.poo.comands.CommandReceiver;
 import pt.iul.dcti.poo.financemanager.Configuration;
+import pt.iul.dcti.poo.financemanager.accounts.Account;
 import pt.iul.dcti.poo.utils.Menu;
 
 public class PersonalFinanceManagerUserInterface {
@@ -22,6 +25,12 @@ public class PersonalFinanceManagerUserInterface {
 
     private final String[] OPTIONS = { OPT_GLOBAL_POSITION,
             OPT_ACCOUNT_STATEMENT, OPT_LIST_CATEGORIES, OPT_ANALISE, OPT_EXIT };
+
+    public static String chooseAccount(Map<String, Account> accounts) {
+        String[] accountOptions = accounts.keySet().toArray(
+                new String[accounts.size()]);
+        return Menu.requestSelection("Choose an Account", accountOptions);
+    }
 
     private CommandReceiver<String, Command> opts;
 

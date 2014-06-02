@@ -11,6 +11,7 @@ import pt.iul.dcti.poo.financemanager.commands.GlobalPositionCommand;
 import pt.iul.dcti.poo.financemanager.commands.ListCategoriesCommand;
 import pt.iul.dcti.poo.financemanager.commands.MetricsCommand;
 import pt.iul.dcti.poo.financemanager.commands.MonthlySummaryCommand;
+import pt.iul.dcti.poo.financemanager.commands.PredictionPerCategoryCommand;
 import pt.iul.dcti.poo.financemanager.gui.PersonalFinanceManagerUserInterface;
 
 /**
@@ -31,24 +32,27 @@ public class Main {
         CommandReceiver<String, Command> metricsOptions = new CommandReceiver<>();
 
         Command exit = new ExitCommand(pfm);
-        options.put(null, exit); // cancel
-        options.put(PersonalFinanceManagerUserInterface.OPT_EXIT, exit);
+        options.putCommand(null, exit); // cancel
+        options.putCommand(PersonalFinanceManagerUserInterface.OPT_EXIT, exit);
 
-        options.put(PersonalFinanceManagerUserInterface.OPT_GLOBAL_POSITION,
+        options.putCommand(PersonalFinanceManagerUserInterface.OPT_GLOBAL_POSITION,
                 new GlobalPositionCommand(pfm, new BalanceAccountFormat()));
-        options.put(PersonalFinanceManagerUserInterface.OPT_ACCOUNT_STATEMENT,
+        options.putCommand(PersonalFinanceManagerUserInterface.OPT_ACCOUNT_STATEMENT,
                 new AccountStatementCommand(pfm, new SimpleStatementFormat()));
-        options.put(PersonalFinanceManagerUserInterface.OPT_LIST_CATEGORIES,
+        options.putCommand(PersonalFinanceManagerUserInterface.OPT_LIST_CATEGORIES,
                 new ListCategoriesCommand(pfm));
-        options.put(PersonalFinanceManagerUserInterface.OPT_ANALISE,
+        options.putCommand(PersonalFinanceManagerUserInterface.OPT_ANALISE,
                 new MetricsCommand(metricsOptions));
 
-        metricsOptions.put(
+        metricsOptions.putCommand(
                 PersonalFinanceManagerUserInterface.OPT_MONTHLY_SUMMARY,
                 new MonthlySummaryCommand(pfm));
-        metricsOptions.put(
+        metricsOptions.putCommand(
                 PersonalFinanceManagerUserInterface.OPT_ANUAL_INTEREST,
                 new AnualInterestCommand(pfm));
+        metricsOptions.putCommand(
+                PersonalFinanceManagerUserInterface.OPT_PREDICTION_PER_CATEGORY,
+                new PredictionPerCategoryCommand(pfm));
 
         new PersonalFinanceManagerUserInterface(options).execute();
     }

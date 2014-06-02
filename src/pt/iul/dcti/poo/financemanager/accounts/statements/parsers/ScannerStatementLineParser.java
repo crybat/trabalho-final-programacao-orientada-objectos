@@ -47,7 +47,7 @@ public class ScannerStatementLineParser implements StatementLineParser<Scanner> 
     private static final Pattern PATTERN = Pattern
             .compile("(\\d{2}-\\d{2}-\\d{4})\\s*;" // Date
                     + "(\\d{2}-\\d{2}-\\d{4})\\s*;" // Value Date
-                    + "([\\w\\s]+);" // Description
+                    + "([\\w\\s\\.]+);" // Description
                     + "(-\\d+\\.?\\d*|0\\.?0?)*\\s*;" // Draft
                     + "(\\d+\\.?\\d*)*\\s*;" // Credit
                     + "(-?\\d+\\.?\\d*)*\\s*;" // Accounting balance

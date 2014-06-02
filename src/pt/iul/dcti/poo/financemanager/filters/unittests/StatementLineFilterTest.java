@@ -2,7 +2,7 @@ package pt.iul.dcti.poo.financemanager.filters.unittests;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.SortedSet;
+import java.util.NavigableSet;
 import java.util.TreeSet;
 
 import org.junit.Test;
@@ -17,7 +17,7 @@ public class StatementLineFilterTest {
 
     @Test
     public void noCategoryFilter() {
-        SortedSet<StatementLine> ss = new TreeSet<>();
+        NavigableSet<StatementLine> ss = new TreeSet<>();
         ss.add(new StatementLine(new Date(1, 1, 2014), new Date(1, 1, 2014),
                 "description", 0.0, 22, 1520, 1542, null));
         ss.add(new StatementLine(new Date(1, 1, 2014), new Date(1, 1, 2014),
@@ -25,7 +25,7 @@ public class StatementLineFilterTest {
 
         StatementLineFilter filter = new StatementLineFilter(
                 new NoCategorySelector());
-        SortedSet<StatementLine> filtered = (SortedSet<StatementLine>) filter
+        NavigableSet<StatementLine> filtered = (NavigableSet<StatementLine>) filter
                 .apply(ss);
         assertEquals(1, filtered.size());
     }

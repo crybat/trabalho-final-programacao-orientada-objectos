@@ -1,18 +1,18 @@
 package pt.iul.dcti.poo.financemanager.categories;
 
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Set;
 
 public class CategoryIndex {
 
-    private Set<Category> categories;
+    private List<Category> categories;
 
     public CategoryIndex() {
-        categories = new HashSet<>();
+        categories = new ArrayList<>();
     }
 
-    public CategoryIndex(Set<Category> categories) {
+    public CategoryIndex(List<Category> categories) {
         this.categories = categories;
     }
 
@@ -20,7 +20,7 @@ public class CategoryIndex {
         categories.add(category);
     }
 
-    public Set<Category> getCategories() {
+    public List<Category> getCategories() {
         return categories;
     }
 

@@ -162,8 +162,16 @@ public class StatementLine implements Comparable<StatementLine> {
         if (equals(o)) {
             return 0;
         }
-        int diff = getDate().compareTo(o.getDate());
-        return diff == 0 ? -1 : diff;
+
+        if (valueDate.compareTo(o.valueDate) > 0)
+            return valueDate.compareTo(o.valueDate);
+        else if (date.compareTo(o.date) > 0)
+            return date.compareTo(o.date);
+        else if (Math.abs(o.getAvailableBalance() - (getAvailableBalance() + o.credit + o.draft)) < 0.001) {
+            return -1;
+        }
+        
+        return 1;
     }
 
     /*

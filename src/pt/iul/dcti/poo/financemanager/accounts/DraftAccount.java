@@ -2,7 +2,7 @@ package pt.iul.dcti.poo.financemanager.accounts;
 
 import java.util.Calendar;
 import java.util.Iterator;
-import java.util.SortedSet;
+import java.util.NavigableSet;
 
 import pt.iul.dcti.poo.financemanager.accounts.statements.StatementLine;
 import pt.iul.dcti.poo.financemanager.date.Date;
@@ -20,9 +20,9 @@ public class DraftAccount extends Account {
     public double yearlyInterestEstimate() {
         int year = Calendar.getInstance().get(Calendar.YEAR);
         Selector<StatementLine> selector = new BetweenDatesSelector(new Date(1,
-                1, year), new Date(31, 12, year));
+                1, year), getEndDate());
         StatementLineFilter filter = new StatementLineFilter(selector);
-        SortedSet<StatementLine> sttmts = (SortedSet<StatementLine>) filter
+        NavigableSet<StatementLine> sttmts = (NavigableSet<StatementLine>) filter
                 .apply(getStatements());
 
         return estimatedAverageBalance(sttmts) * getInterestRate();
@@ -38,7 +38,7 @@ public class DraftAccount extends Account {
         return BanksConstants.normalInterestRate();
     }
 
-    private double estimatedAverageBalance(SortedSet<StatementLine> statements) {
+    private double estimatedAverageBalance(NavigableSet<StatementLine> statements) {
 
         if (statements.isEmpty())
             return 0.0;

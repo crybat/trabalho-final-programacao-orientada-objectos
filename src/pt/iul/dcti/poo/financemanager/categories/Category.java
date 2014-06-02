@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import pt.iul.dcti.poo.persistence.Deserializer;
@@ -14,14 +15,14 @@ public class Category implements Serializable {
     private String name;
     private Set<String> descriptions = new HashSet<>();
 
-    public static Set<Category> readCategories(String fileName)
+    public static List<Category> readCategories(String fileName)
             throws ClassNotFoundException, IOException {
-        return new Deserializer<Set<Category>>().deserialize(fileName);
+        return new Deserializer<List<Category>>().deserialize(fileName);
     }
 
-    public static void saveCategories(Set<Category> categories, String fileName)
+    public static void saveCategories(List<Category> categories, String fileName)
             throws IOException {
-        new Serializer<Set<Category>>().serialize(categories, fileName);
+        new Serializer<List<Category>>().serialize(categories, fileName);
     }
 
     public Category(String name) throws IllegalArgumentException {
@@ -35,6 +36,10 @@ public class Category implements Serializable {
 
     public String getName() {
         return name;
+    }
+    
+    public Set<String> getDescriptions() {
+        return descriptions;
     }
 
     public void addDescription(String description)
@@ -76,7 +81,7 @@ public class Category implements Serializable {
     /*
      * SERIALIZATION
      */
-    private static final long serialVersionUID = 5163947404055312940L;
+    private static final long serialVersionUID = 7379892715140836581L;
     
     
     private void readObject(ObjectInputStream inputStream)
